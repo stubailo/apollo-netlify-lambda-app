@@ -19,9 +19,4 @@ const server = new ApolloServer({
   resolvers
 });
 
-const handler = server.createHandler()
-
-exports.handler = (event, context, callback) => {
-  console.log(event);
-  handler(event, context, callback);
-}
+exports.handler = server.createHandler();
