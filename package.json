@@ -4,9 +4,8 @@
   "private": true,
   "dependencies": {
     "apollo-boost": "^0.1.13",
-    "apollo-server-lambda": "^2.0.0",
+    "apollo-server-lambda": "^2.0.1",
     "graphql": "^0.13.2",
-    "netlify-lambda": "^0.4.0",
     "react": "^16.3.1",
     "react-apollo": "^2.1.11",
     "react-dom": "^16.3.1",
@@ -18,7 +17,11 @@
     "build": "react-scripts build",
     "build:lambda": "netlify-lambda build src/lambda",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "schema:publish": "apollo schema:publish --endpoint=http://localhost:9000/graphql",
+    "schema:start-and-publish": "start-server-and-test start:lambda http-get://localhost:9000/graphql?query={__typename} schema:publish",
+    "schema:check": "apollo schema:check --endpoint=http://localhost:9000/graphql",
+    "schema:start-and-check": "start-server-and-test start:lambda http-get://localhost:9000/graphql?query={__typename} schema:check"
   },
   "proxy": {
     "/.netlify/functions": {
@@ -27,5 +30,10 @@
         "^/\\.netlify/functions": ""
       }
     }
+  },
+  "devDependencies": {
+    "apollo": "^1.7.0",
+    "start-server-and-test": "^1.7.0",
+    "netlify-lambda": "^0.4.0"
   }
 }
